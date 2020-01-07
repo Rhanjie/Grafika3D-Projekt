@@ -9,17 +9,20 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour {
     public GameObject finish;
     public TextMeshProUGUI finishText;
+    private Rigidbody rigidbody;
 
     private void Start() {
         finish.active = false;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = true;
     }
-    
+     
     private void Update() {
         if (!finish.activeInHierarchy) {
             Vector3 vTmp = new Vector3(-Input.GetAxis("Horizontal"), 0, 
                                        -Input.GetAxis("Vertical")) * (500 * Time.deltaTime);
 
-            GetComponent<Rigidbody>().AddForce(vTmp);
+            rigidbody.AddForce(vTmp);
         }
 
         if (transform.position.y < -6f) {
@@ -39,9 +42,11 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void FinishGame(string message) {
+    private void FinishGame(string message) {
         finishText.text = message;
         finish.SetActive(true);
+        
+        rigidbody.useGravity = false;
     }
     
     public void ResetGame() {

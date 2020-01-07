@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
-{
-    static public UIManager instance;
+public class UIManager : MonoBehaviour {
+    public static UIManager instance;
     
     public Text pointsText;
-    int points = 0;
+    private int points = 0;
     public int Points {
        get { return points; }
        set {
@@ -17,9 +16,7 @@ public class UIManager : MonoBehaviour
        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         instance = this;
         points = 0;
     }
